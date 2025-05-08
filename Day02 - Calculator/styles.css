@@ -1,0 +1,159 @@
+:root {
+    --bg-color: #0a0a0a;
+    --primary-color: rgba(26, 26, 26, 0.7);
+    --secondary-color: rgba(42, 42, 42, 0.6);
+    --accent-color: #00ffc3;
+    --danger-color: #ff4d4d;
+    --text-color: #ffffff;
+    --button-bg: rgba(31, 31, 31, 0.7);
+    --button-hover: rgba(51, 51, 51, 0.9);
+    --glass-blur: blur(12px);
+    --border-glow: 0 0 10px rgba(0, 255, 195, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: var(--text-color);
+    padding: 20px;
+    overflow: hidden;
+}
+
+.calculator {
+    background-color: var(--primary-color);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 24px;
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(0, 255, 195, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.02);
+    width: 360px;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    transition: transform 0.3s ease;
+}
+
+.calculator:hover {
+    transform: scale(1.01);
+}
+
+.display {
+    grid-column: span 4;
+    background-color: var(--secondary-color);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 16px;
+    padding: 24px;
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: right;
+    font-size: 2rem;
+    box-shadow: inset 0 0 20px rgba(0, 255, 195, 0.2);
+    color: var(--accent-color);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.previous-operand {
+    font-size: 1rem;
+    color: #bbb;
+    opacity: 0.7;
+}
+
+.current-operand {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+button {
+    padding: 18px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 14px;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 255, 195, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+button:hover::before {
+    opacity: 1;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button[data-action="operation"] {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+button[data-action="clear"],
+button[data-action="delete"] {
+    background-color: var(--danger-color);
+    color: #fff;
+    font-weight: bold;
+}
+
+button[data-action="calculate"] {
+    background-color: var(--accent-color);
+    color: #000;
+    font-weight: bold;
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+@media (max-width: 420px) {
+    .calculator {
+        gap: 10px;
+        padding: 18px;
+    }
+
+    .display {
+        font-size: 1.4rem;
+        padding: 16px;
+    }
+
+    .current-operand {
+        font-size: 1.6rem;
+    }
+
+    button {
+        padding: 14px;
+        font-size: 1rem;
+        border-radius: 10px;
+    }
+}
